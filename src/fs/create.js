@@ -1,5 +1,5 @@
 import { writeFile } from "node:fs/promises";
-import { pathExist as isFileExist } from "./pathExist.mjs";
+import { pathExist as isFileExist, checkResponse } from "./fsCheck.mjs";
 import { FS_OPERATION_FAILED, FS_UNDEFINED_ERROR } from "./fsErrorMessages.mjs";
 
 const create = async () => {
@@ -14,13 +14,12 @@ const create = async () => {
       throw new Error(FS_OPERATION_FAILED);
     }
 
-    const responseUndefinedOnSuccess = await writeFile(filePathUrl, data);
+    const response = await writeFile(filePathUrl, data);
 
-    if (typeof responseUndefinedOnSuccess !== "undefined") {
-      throw new Error(FS_UNDEFINED_ERROR);
-    }
-
-    console.info("The file has been saved successfully!");
+    checkResponse(
+      response,
+      "The file has been saved successfully!"
+    );
   } catch (e) {
     // Pass the error on
     throw e;

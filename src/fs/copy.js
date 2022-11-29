@@ -1,6 +1,6 @@
 import { cp } from "node:fs/promises";
-import { pathExist } from "./pathExist.mjs";
-import { FS_OPERATION_FAILED, FS_UNDEFINED_ERROR } from './fsErrorMessages.mjs'
+import { pathExist, checkResponse } from "./fsCheck.mjs";
+import { FS_OPERATION_FAILED, FS_UNDEFINED_ERROR } from "./fsErrorMessages.mjs";
 
 const copy = async () => {
   const srcPath = "./files";
@@ -22,15 +22,11 @@ const copy = async () => {
       throw new Error(FS_OPERATION_FAILED);
     }
 
-    const responseUndefinedOnSuccess = await cp(srcPathUrl, destPathUrl, {
+    const response = await cp(srcPathUrl, destPathUrl, {
       recursive: true,
     });
 
-    if (typeof responseUndefinedOnSuccess !== "undefined") {
-      throw new Error(FS_UNDEFINED_ERROR);
-    }
-
-    console.info("Directory with files have been copied");
+    checkResponse(response, "Directory with files have been copied");
   } catch (e) {
     throw e;
   }

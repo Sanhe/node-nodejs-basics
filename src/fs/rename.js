@@ -1,10 +1,10 @@
 import { rename as fsRename } from "node:fs/promises";
-import { pathExist } from "./pathExist.mjs";
+import { pathExist, checkResponse } from "./fsCheck.mjs";
 import { FS_OPERATION_FAILED, FS_UNDEFINED_ERROR } from "./fsErrorMessages.mjs";
 
 const rename = async () => {
   try {
-    const wrongFilePath = new URL("./files/wrongFilename.txt", import.meta.url);
+    const wrongFilePath = new URL("./files/wrongFilename1.txt", import.meta.url);
     const properFilePath = new URL(
       "./files/properFilename.md",
       import.meta.url
@@ -22,16 +22,12 @@ const rename = async () => {
       throw new Error(FS_OPERATION_FAILED);
     }
 
-    const responseUndefinedOnSuccess = await fsRename(
+    const response = await fsRename(
       wrongFilePath,
       properFilePath
     );
 
-    if (typeof responseUndefinedOnSuccess !== "undefined") {
-      throw new Error(FS_UNDEFINED_ERROR);
-    }
-
-    console.info("The wrong file has been renamed successfully!");
+    checkResponse(response, "The wrong file has been renamed successfully!");
   } catch (e) {
     throw e;
   }

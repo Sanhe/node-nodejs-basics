@@ -1,4 +1,5 @@
 import { stat } from 'node:fs/promises';
+import { FS_UNDEFINED_ERROR } from "./fsErrorMessages.mjs";
 
 export async function pathExist (pathUrl) {
   try {
@@ -18,4 +19,12 @@ export async function pathExist (pathUrl) {
     // Pass the error on
     throw e;
   }
+}
+
+export function checkResponse(responseUndefinedOnSuccess, successMessage) {
+  if (typeof responseUndefinedOnSuccess !== "undefined") {
+    throw new Error(FS_UNDEFINED_ERROR);
+  }
+
+  console.info(successMessage);
 }
