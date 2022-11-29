@@ -22,8 +22,6 @@ const create = async () => {
 
     console.info("The file has been saved successfully!");
   } catch (e) {
-    // Show the error
-    console.error(e.message);
     // Pass the error on
     throw e;
   }

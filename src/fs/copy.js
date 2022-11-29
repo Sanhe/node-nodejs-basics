@@ -32,7 +32,6 @@ const copy = async () => {
 
     console.info("Directory with files have been copied");
   } catch (e) {
-    console.log(e.message);
     throw e;
   }
 };
