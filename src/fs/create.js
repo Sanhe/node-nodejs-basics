@@ -1,6 +1,6 @@
 import { writeFile } from "node:fs/promises";
 import { pathExist as isFileExist, checkResponse } from "./fsCheck.mjs";
-import { FS_OPERATION_FAILED, FS_UNDEFINED_ERROR } from "./fsErrorMessages.mjs";
+import { FS_OPERATION_FAILED } from "./fsErrorMessages.mjs";
 
 const create = async () => {
   const filePath = "./files/fresh.txt";

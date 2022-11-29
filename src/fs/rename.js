@@ -1,6 +1,6 @@
 import { rename as fsRename } from "node:fs/promises";
 import { pathExist, checkResponse } from "./fsCheck.mjs";
-import { FS_OPERATION_FAILED, FS_UNDEFINED_ERROR } from "./fsErrorMessages.mjs";
+import { FS_OPERATION_FAILED } from "./fsErrorMessages.mjs";
 
 const rename = async () => {
   try {
