@@ -1,29 +1,16 @@
 import { writeFile } from "node:fs/promises";
-import { pathExist as isFileExist, checkResponse } from "./fsCheck.mjs";
+import { pathExist as isFileExist } from "./fsCheck.mjs";
 import { FS_OPERATION_FAILED } from "./fsErrorMessages.mjs";
 
 const create = async () => {
-  const filePath = "./files/fresh.txt";
-  const data = "I am fresh and young";
+  const filePathUrl = new URL("./files/fresh.txt", import.meta.url);
+  const fileExist = await isFileExist(filePathUrl);
 
-  try {
-    const filePathUrl = new URL(filePath, import.meta.url);
-    const fileExist = await isFileExist(filePathUrl);
-
-    if (fileExist) {
-      throw new Error(FS_OPERATION_FAILED);
-    }
-
-    const response = await writeFile(filePathUrl, data);
-
-    checkResponse(
-      response,
-      "The file has been saved successfully!"
-    );
-  } catch (e) {
-    // Pass the error on
-    throw e;
+  if (fileExist) {
+    throw new Error(FS_OPERATION_FAILED);
   }
+
+  await writeFile(filePathUrl, "I am fresh and young");
 };
 
 await create();
