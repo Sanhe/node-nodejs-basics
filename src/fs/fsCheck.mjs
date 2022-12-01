@@ -4,9 +4,7 @@ export async function pathExist (pathUrl) {
   try {
     const stats = await stat(pathUrl)
 
-    if (stats) {
-      return true
-    }
+    return !!stats
   }
   catch (e) {
     // If the error is ENOENT (missing file/dir) so the file/dir doesn't exist
