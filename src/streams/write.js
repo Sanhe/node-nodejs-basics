@@ -11,7 +11,7 @@ const write = async () => {
 
   const readline = createInterface({ input, output, terminal: false });
 
-  readline.on("line", async (line) => {
+  readline.on("line", (line) => {
     const data = new Uint8Array(Buffer.from(line + "\n"));
     writeStream.write(data);
   });
