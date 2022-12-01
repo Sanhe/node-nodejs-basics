@@ -19,8 +19,8 @@ const calculateHash = async () => {
   const fileHandle = await open(fileToReadPath);
   const inputStream = fileHandle.createReadStream();
 
-  const hash1 = createHash("sha256");
-  inputStream.pipe(hash1).setEncoding("hex").pipe(stdout);
+  const hash = createHash("sha256");
+  inputStream.pipe(hash).setEncoding("hex").pipe(stdout);
 };
 
 await calculateHash();
