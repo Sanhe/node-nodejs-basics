@@ -14,7 +14,7 @@ const read = async () => {
   const readStream = filehandle.createReadStream({ encoding: "utf8" });
 
   readStream.on("error", function (e) {
-    console.log(`error: ${e.message}`);
+    console.error(`error: ${e.message}`);
   });
 
   // 'readable' may be triggered multiple times as data is buffered in
