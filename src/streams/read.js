@@ -1,5 +1,5 @@
 import { open } from "node:fs/promises";
-import { pathExist } from "../fs/fsCheck.mjs";
+import { pathExist } from "../fs/pathExist.mjs";
 import { FS_OPERATION_FAILED } from "../fs/fsErrorMessages.mjs";
 
 const read = async () => {

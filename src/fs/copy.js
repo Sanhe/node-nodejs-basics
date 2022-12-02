@@ -1,5 +1,5 @@
 import { cp } from "node:fs/promises";
-import { pathExist } from "./fsCheck.mjs";
+import { pathExist } from "./pathExist.mjs";
 import { FS_OPERATION_FAILED } from "./fsErrorMessages.mjs";
 
 const copy = async () => {

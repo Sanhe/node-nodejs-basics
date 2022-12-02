@@ -2,7 +2,7 @@ import { createGzip } from "node:zlib";
 import { pipeline } from "node:stream";
 import { createReadStream, createWriteStream } from "node:fs";
 import { promisify } from "node:util";
-import { pathExist } from "../fs/fsCheck.mjs";
+import { pathExist } from "../fs/pathExist.mjs";
 import { FS_OPERATION_FAILED } from "../fs/fsErrorMessages.mjs";
 
 const compress = async () => {

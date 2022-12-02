@@ -1,5 +1,5 @@
 import { writeFile } from "node:fs/promises";
-import { pathExist as isFileExist } from "./fsCheck.mjs";
+import { pathExist as isFileExist } from "./pathExist.mjs";
 import { FS_OPERATION_FAILED } from "./fsErrorMessages.mjs";
 
 const create = async () => {

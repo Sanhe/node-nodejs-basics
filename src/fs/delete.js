@@ -1,10 +1,10 @@
 import { rm } from "node:fs/promises";
-import { pathExist } from "./fsCheck.mjs";
+import { pathExist } from "./pathExist.mjs";
 import { FS_OPERATION_FAILED } from "./fsErrorMessages.mjs";
 
 const remove = async () => {
     const fileToRemovePath = new URL(
-      "./files/fileToRemove1.txt",
+      "./files/fileToRemove.txt",
       import.meta.url
     );
     const isFileToRemoveExist = await pathExist(fileToRemovePath);
