@@ -1,6 +1,4 @@
-import { spawn } from "node:child_process";
-import { createInterface } from "node:readline";
-import { stdin as input, stdout as output } from "node:process";
+import { fork } from "node:child_process";
 import { pathExist } from "../fs/pathExist.mjs";
 import { FS_OPERATION_FAILED } from "../fs/fsErrorMessages.mjs";
 
@@ -12,19 +10,9 @@ const spawnChildProcess = async (args) => {
     throw new Error(FS_OPERATION_FAILED);
   }
 
-  const preparedArgs = Array.isArray(args) ? args : [args];
-  const argsToChild = [childFilePath.pathname, ...preparedArgs];
-  const childProcess = spawn(process.argv[0], argsToChild);
-
-  const readline = createInterface({ input, output, terminal: false });
-
-  readline.on("line", (line) => {
-    // child process stdin should receive input from master process stdin.
-    childProcess.stdin.write(line);
+  fork(childFilePath, args, {
+    stdio: ["inherit", "inherit", "inherit", "ipc"],
   });
-
-  // child process stdout should send data to master process stdout
-  childProcess.stdout.pipe(output);
 };
 
 spawnChildProcess();
